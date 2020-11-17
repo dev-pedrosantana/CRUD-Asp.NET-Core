@@ -1,0 +1,75 @@
+﻿@model List<Projeto.Data.Entities.Produto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Consulta</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <div class="card card-body bg-dark text-white">
+            <h3> Sistema de controle de produtos</h3>
+            <p>Projeto desenvolvido com Asp .Net CORE e Dapper</p>
+        </div>
+        <br />
+        <h4>Consulta de produtos</h4>
+        <a href="/Home/Index">Página inicial</a>
+        <hr />
+
+        <br />
+        <strong>@TempData["mensagem"]</strong>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="bg-info text-white">Código</th>
+                    <th class="bg-info text-white">Nome do produto</th>
+                    <th class="bg-info text-white">Preço</th>
+                    <th class="bg-info text-white">Quantidade</th>
+                    <th class="bg-info text-white">Total</th>
+                    <th class="bg-info text-white">Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Corpo da tabela-->
+                @foreach (var item in Model)
+                {
+                <tr>
+                    
+                    <td class="text-center">@item.IdProduto</td>
+                    <td>@item.Nome</td>
+                    <td>@item.Preco.ToString("c")</td>
+                    <td>@item.Quantidade</td>
+                    <td>@((item.Preco * item.Quantidade).ToString("c"))</td>
+                    <td class="text-center">
+                        <a href="/Produto/Edicao/@item.IdProduto" class="btn btn-primary btn-sm">Atualizar</a>
+                        <a href="/Produto/Exclusao/@item.IdProduto" class="btn btn-danger btn-sm" onclick="return ConfirmarExclusao();">Excluir</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">Quantidade de registros: @Model.Count</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+
+    <script>
+        function ConfirmarExclusao() {
+            return window.confirm("Confirmar exclusão do produto?");
+        }
+    </script>
+</body>
+</html>

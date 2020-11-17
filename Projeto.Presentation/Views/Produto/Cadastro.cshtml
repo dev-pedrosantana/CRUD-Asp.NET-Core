@@ -1,0 +1,51 @@
+﻿@model Projeto.Presentation.Models.CadastrarProdutoModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="card card-body bg-dark text-white">
+            <h3>Sistema de controle de produtos</h3>
+            <p>Projeto desenvolvido com Asp.Net CORE e Dapper</p>
+        </div>
+        <br />
+        <h4>Formulário de cadastro de produto</h4>
+        <a href="/Home/Index">Página inicial</a>
+        <hr />
+
+        <div class="text-danger">
+            @Html.ValidationSummary()
+        </div>
+
+
+        <form action="/Produto/Cadastro" method="post">
+          <label>Nome do Produto:</label>
+            @Html.TextBoxFor(model => model.Nome, new { @placeholder = "Digite aqui", @class = "form-control col-md-4"})
+            <br />
+            <label>Quantidade:</label>
+            @Html.TextBoxFor(model => model.Quantidade, new { @placeholder = "Quantidade", @class = "form-control col-md-4"})
+            <br />
+            <label>Preço:</label>
+            @Html.TextBoxFor(model => model.Preco, new { @placeholder = "Preço", @class="form-control col-md-4"})
+            <br />
+
+            <input type="submit" value="Cadastrar Produto" class="btn btn-success" />
+
+            <br />
+            <strong>@TempData["Mensagem"]</strong>
+        </form>
+    </div>
+
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+</body>
+</html>
